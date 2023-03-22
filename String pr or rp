@@ -1,0 +1,77 @@
+// Solving this problem 
+// i am strckting two points
+
+// first one is 
+// greedy means  :- simple meaning of greedy lalchi 
+
+// and 2nd one
+// problem solving using stack how it works 
+// next time when you do this problem 
+// remember one thinks how to stack wokrs and my openion is do dryrun this and clear picturs
+
+
+
+class Solution{   
+public:
+    long long hepler(string s,int first,int second, string str){
+        
+        long total = 0;
+        stack<int> st;
+        
+        for(int i=0; i<s.size(); i++){
+            if(st.size() > 0 and s[i] == str[1] and st.top() == str[0]  ){
+                st.pop();
+                total += first;
+            }
+            else{
+                st.push(s[i]);
+            }
+        }
+        //step -2 stack main element bch gya hoga to string main dal do
+        s = "";
+        while(!st.empty()){
+            char ch = st.top();
+            st.pop();
+            s.push_back(ch);
+        }
+        
+        // element reverse order main hoga but rehne do
+        // kyuki hm dubara stack use krenge X>y tha to 
+        // now you use satck for y(second)
+        
+        for(int i=0; i<s.size(); i++){
+            if(st.size() > 0 and s[i] == str[1] and st.top() == str[0]  ){
+                st.pop();
+                total += second;
+            }
+            else{
+                st.push(s[i]);
+            }
+        }
+        return total;
+    }
+    long long solve(int X,int Y,string S){
+      
+      long long  ans =0;
+      
+      if(X > Y){
+          ans = hepler(S,X,Y,"pr");
+      }
+      else{
+          ans = hepler(S,Y,X,"rp");
+      }
+      
+      return ans;
+    }
+};
+
+// Solving this problem 
+// i am strckting two points
+
+// first one is 
+// greedy means  :- simple meaning of greedy lalchi 
+
+// and 2nd one
+// problem solving using stack how it works 
+// next time when you do this problem 
+// remember one thinks how to stack wokrs and my openion is do dryrun this and clear picturs
