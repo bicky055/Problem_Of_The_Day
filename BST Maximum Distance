@@ -1,0 +1,66 @@
+// here comments line help to how to approach this Question
+
+private:
+    void helper(Node* root,int a, int b,int &ans, int target, bool find){
+         
+        // root is null return -1
+        if(root == NULL){
+            return ;
+        }
+        // base case
+        if(root -> data == target){
+            find = true;
+        }
+        
+        // ab mil gya to sum compute kr lo and add sum of target leaf nodes
+        if(find){
+            b += root->data;
+            // ab b se left and right ka max sum find kr lo 
+            //left sum 
+            
+            helper(root->left,a,b,ans,target,find);
+            
+            // right sum 
+            helper(root->right,a,b,ans,target,find);
+            
+            // yha tk aane k bad hm 
+            //target k left and right k leaf node tk pahuch gye honge
+            if(root->left == NULL && root->right == NULL){
+                // b main target ki bhi value add ho gyi hogi
+                b = b - target;
+                ans = max(ans,a-b);
+            }
+        }
+        // not found then simpli move left ya right and add sum in a
+        else{
+            a += root->data;
+            // left search
+            if(target < root->data){
+                helper(root->left,a,b,ans,target,find);
+            }
+            else{
+                helper(root->right,a,b,ans,target,find);
+            }
+        }
+        
+    }
+public:
+    int maxDifferenceBST(Node *root,int target){
+        //BST properties
+        // left < root < right
+        
+        int a =0, b = 0,ans = INT_MIN;
+        
+        bool target_find = false;
+        
+        helper(root,a,b,ans,target,target_find);
+        
+        if(ans == INT_MIN){ //target not found
+            return -1;
+        }
+        else{ // target found
+            
+            return ans;
+        }
+    }
+};
