@@ -1,0 +1,74 @@
+// next time you just care about the basic thinks
+// just dry run , twopointer approach , and here one impoternt thinks
+// direction is tricky part and thats is new to me so next time just thik and do.
+
+
+
+string removeReverse(string S) {
+        
+        
+        int n = S.size();
+        //Algo 
+        // two pointer approach
+        
+        // step 1
+        // store all charecter frequency using hashmap
+        unordered_map<char,int> freq;
+        for(int i=0; i<n; i++){
+            freq[S[i]]++;
+            
+        }
+        
+        //step -2 
+        // now using two pointer approach
+         int st =0;
+         int end = n-1;
+         
+         int direction =0;  //
+         
+         while(st<=end){
+             // sidhe chlna hai
+             if(direction ==0){
+                 if(freq[S[st]] == 1)
+                 { // repiting charecter nhi hai 
+                    st++;
+                 }
+                 else{ // repating charecter hai to remove kr do
+                    freq[S[st]]--;
+                    S[st] = '@'; // man lo removed hai 
+                    st++;
+                    // ab direction bhi change krna prega
+                    direction = 1;
+                     
+                 }
+             }
+             else{ // piche se chlna hai
+                  
+                 if(freq[S[end]] == 1) { // repating charecter nhi hai
+                     end--;
+                 }
+                 else{
+                     // repating hai
+                     freq[S[end]]--;
+                     S[end] = '@';
+                     end--;
+                     direction = 0;
+                 }
+             }
+         }
+        
+        
+        string str ;
+        for(int j=0; j<n; j++){
+            if(S[j] != '@'){
+                str.push_back(S[j]);
+            }
+        }
+        
+        // if direction = 1 hai to reverse kr do
+        if(direction == 1)
+        {
+          reverse(str.begin(),str.end());
+        }
+        return str;
+    }
