@@ -1,0 +1,32 @@
+// easy question tha but
+// here are some  importent points
+// leaves name se ek array bnana prega then check krenge kon sa leaves bch jayega
+// frogs names se jo array banaya hai usme leaves main multipuls of frogs[i] ko true kr do
+ 
+int unvisitedLeaves(int N, int leaves, int frogs[]) {
+        // Code here
+        
+        vector<bool> vist(leaves+1,false);
+        
+        for(int i=0; i<N; i++){
+            
+            int val = frogs[i];
+            // agr leaves pehle se hi visited ho nhi ho tb
+            if(vist[val] == false){
+                //sab ko true kr do jo bhi val k multipuls ho
+                while(val <= leaves){
+                    vist[val] = true;
+                    val += frogs[i];
+                }
+            }
+        }
+        //now count unvisited leaves
+        int cnt = 0;
+        for(int i=1; i<=leaves; i++){
+            if(vist[i] == false){
+                cnt++;
+            }
+        }
+        
+        return cnt;
+    }
