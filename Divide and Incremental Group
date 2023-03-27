@@ -1,0 +1,42 @@
+//This is my first dp problem , that i face it 
+// this is totaly new thinks to me but i watch the related video 
+// there is one logical path then every thinks is normal so 
+// when you dry run this problem try to create one 2D array (N+1)(k+1) 
+// then solve one by one steps then see the code u undestand the problem 
+
+
+int countWaystoDivide(int N, int K) {
+       
+       // Algo
+       //This is Dp problem 
+       
+        // create 2-D DP vector
+        vector<vector<int> > dp(N+1,vector<int> (K+1));
+        
+        //logic how to solve it
+        
+        // put all posible value in dp[N][K] possition
+        
+        for(int i=1; i<=N; i++){
+            
+            
+            for(int j=1; j<=K; j++){
+                
+               // agr k ki value jada ho gyi to hm kese rkhenge
+               if(i<j) {
+                   dp[i][j] = 0;
+               }
+               // ek hi posion hai to ek value ko ek hi jagah rkh skte hain
+               else if(i == j){
+                   dp[i][j] = 1;
+               }
+                //main logic part 
+                // this is observation 
+                else {
+                    //  j > i and j <= K tk 
+                    dp[i][j] = dp[i-1][j-1] +dp[i-j][j];
+                }
+            }
+        }
+        return dp[N][K];
+    }
